@@ -1,0 +1,16 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+.DS_Store
+
+# tsc build artifacts
+*.tsbuildinfo
+playwright.config.js
+playwright.config.d.ts
+playwright.config.d.ts.map
+playwright.config.js.map
+vite.config.js
+vite.config.d.ts
+vite.config.d.ts.map
+vite.config.js.map

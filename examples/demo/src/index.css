@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@import "tw-layout-lint/source.css";
+
+/* Demo-specific utilities. These are NOT part of tw-layout-lint's allowlist
+   — they are host-owned styling, declared here so the demo's own chrome
+   (cards, buttons, code blocks) renders correctly without polluting the
+   layout-only contract. */

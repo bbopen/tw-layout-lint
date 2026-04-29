@@ -1,0 +1,78 @@
+{
+  "name": "tw-layout-lint",
+  "version": "0.1.0",
+  "description": "Layout-only class validator for Tailwind CSS agent output, with stable diagnostic codes and a finite runtime safelist. For Tailwind CSS v4.",
+  "license": "MIT",
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "tailwind-v4",
+    "layout",
+    "validator",
+    "lint",
+    "agent",
+    "llm",
+    "generative-ui",
+    "container-queries"
+  ],
+  "type": "module",
+  "files": [
+    "dist",
+    "docs/skills",
+    "docs/diagnostics.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js",
+      "require": "./dist/react/index.cjs"
+    },
+    "./source.css": "./dist/source.css",
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup && npm run build:source-css && npm run build:diagnostics",
+    "build:source-css": "tsx scripts/gen-source-css.ts",
+    "build:diagnostics": "tsx scripts/gen-diagnostics-md.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.4",
+    "@testing-library/react": "^16.0.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.3.0",
+    "@vitest/coverage-v8": "^2.0.0",
+    "fast-check": "^3.20.0",
+    "happy-dom": "^15.0.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "tsup": "^8.3.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
