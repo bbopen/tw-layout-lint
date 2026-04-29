@@ -43,18 +43,18 @@ cat > package.json <<EOF
   "type": "module",
   "scripts": { "build": "vite build" },
   "dependencies": {
-    "react": "^18.3.0",
-    "react-dom": "^18.3.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "tw-layout-lint": "file:${PKG_ROOT}/${TARBALL}"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.2.0",
-    "@types/react": "^18.3.0",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.0",
-    "tailwindcss": "^4.2.0",
-    "typescript": "^5.5.0",
-    "vite": "^5.4.0"
+    "@tailwindcss/vite": "^4.2.4",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^6.0.0",
+    "tailwindcss": "^4.2.4",
+    "typescript": "^6.0.0",
+    "vite": "^8.0.0"
   }
 }
 EOF
@@ -115,6 +115,10 @@ EOF
 cat > src/index.css <<'EOF'
 @import "tailwindcss";
 @import "tw-layout-lint/source.css";
+EOF
+
+cat > src/vite-env.d.ts <<'EOF'
+/// <reference types="vite/client" />
 EOF
 
 echo "==> Installing"

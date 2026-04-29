@@ -105,8 +105,14 @@ function useResolved(
 }
 
 function isDev(): boolean {
-  if (typeof process === "undefined" || !process.env) return false;
-  return process.env["NODE_ENV"] !== "production";
+  // `process.env.NODE_ENV` is a bundler-replaced convention (Vite, webpack,
+  // tsup) that also exists in Node. We read it through globalThis so the
+  // adapter doesn't need @types/node in its declared lib (the package's
+  // peer is React, not Node), and so the type-check works whether the
+  // consumer's tsconfig pulls in node types or not.
+  const env = (globalThis as { process?: { env?: Record<string, string | undefined> } })
+    .process?.env;
+  return env?.["NODE_ENV"] !== "production";
 }
 
 function SlotLayoutImpl(props: SlotLayoutProps): React.ReactElement {
