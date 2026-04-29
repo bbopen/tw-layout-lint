@@ -1,0 +1,68 @@
+name: Bug report
+description: A behavior that doesn't match the documented contract
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. The faster you can get me to a minimal reproduction,
+        the faster the fix lands. If a diagnostic code seems wrong, please include it.
+
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Affected surface
+      options:
+        - validate() / describe() (core)
+        - validateOrThrow / LayoutLintError
+        - <SlotLayout> React adapter
+        - source.css / Tailwind v4 build
+        - TypeScript declarations
+        - Demo / docs
+    validations:
+      required: true
+
+  - type: textarea
+    id: input
+    attributes:
+      label: Minimal LayoutLintInput JSON (or repro snippet)
+      description: The smaller, the better. Paste the exact `validate(...)` argument or a tiny code sample.
+      render: json
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect? Include diagnostic codes if relevant.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happened instead? Include the full `errors` and `warnings` arrays if you have them.
+    validations:
+      required: true
+
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: "Node 22.0.0, Tailwind 4.2.4, React 18.3.1, vite 5.4.21"
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Stack traces, screenshots, or related context.

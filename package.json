@@ -21,6 +21,7 @@
     "docs/skills",
     "docs/diagnostics.md",
     "README.md",
+    "CHANGELOG.md",
     "LICENSE"
   ],
   "exports": {
@@ -74,5 +75,17 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bbopen/tw-layout-lint.git"
+  },
+  "homepage": "https://github.com/bbopen/tw-layout-lint#readme",
+  "bugs": {
+    "url": "https://github.com/bbopen/tw-layout-lint/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

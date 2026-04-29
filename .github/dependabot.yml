@@ -1,0 +1,71 @@
+version: 2
+
+updates:
+  # The package itself
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    labels: ["dependencies", "package"]
+    commit-message:
+      prefix: "deps"
+      include: scope
+    groups:
+      typescript-tooling:
+        patterns:
+          - "typescript"
+          - "tsup"
+          - "tsx"
+          - "@types/*"
+      vitest-tooling:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+          - "happy-dom"
+      tailwind-tooling:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+      react-testing:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@testing-library/*"
+
+  # The demo subproject
+  - package-ecosystem: npm
+    directory: "/examples/demo"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels: ["dependencies", "demo"]
+    commit-message:
+      prefix: "deps(demo)"
+    groups:
+      vite-tooling:
+        patterns:
+          - "vite"
+          - "@vitejs/*"
+          - "@playwright/*"
+      tailwind-tooling:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+      react-stack:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react*"
+
+  # GitHub Actions versions
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    labels: ["dependencies", "ci"]
+    commit-message:
+      prefix: "ci"

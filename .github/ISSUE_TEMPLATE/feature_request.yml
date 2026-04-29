@@ -1,0 +1,48 @@
+name: Feature request
+description: A new diagnostic, a new utility, an API addition
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before opening: this package is intentionally narrow (layout-only Tailwind v4
+        validation). Visual styling, animation, and full-page layout are out of scope
+        for v0.x. See `docs/superpowers/specs/2026-04-27-tw-layout-lint-design.md` §3
+        and §20 for what won't be added.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What's missing or wrong? What input or use case isn't covered?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: |
+        - New diagnostic code? Show the trigger input + suggested code name + suggested message.
+        - New utility on the allowlist? Show the Tailwind class string + the CSS property it maps to.
+        - New API? Show the call signature.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Existing behavior, workarounds, or related tools.
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      description: |
+        v0.x stays narrow. Confirm before submitting.
+      options:
+        - label: This is a layout concern (placement, sizing constraints, gap, responsive collapse), not visual styling
+          required: true
+        - label: I've read the design spec's "Out of scope, ever" section
+          required: true

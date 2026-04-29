@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Design questions / discussion
+    url: https://github.com/bbopen/tw-layout-lint/discussions
+    about: Use Discussions for open-ended design or usage questions.

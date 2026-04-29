@@ -1,0 +1,109 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: test (node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["20", "22"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Build (generates dist/source.css and docs/diagnostics.md)
+        run: npm run build
+
+      - name: Diagnostics doc drift
+        run: |
+          npx tsx scripts/gen-diagnostics-md.ts
+          if ! git diff --quiet docs/diagnostics.md; then
+            echo "::error::docs/diagnostics.md is out of sync with src/diagnostics.ts. Run: npx tsx scripts/gen-diagnostics-md.ts"
+            git --no-pager diff docs/diagnostics.md
+            exit 1
+          fi
+
+      - name: Test
+        run: npm test
+
+  demo-e2e:
+    name: demo e2e (chromium)
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install (root)
+        run: npm ci
+
+      - name: Build (root)
+        run: npm run build
+
+      - name: Install (demo)
+        working-directory: examples/demo
+        run: npm install --no-audit --no-fund
+
+      - name: Install Playwright Chromium
+        working-directory: examples/demo
+        run: npx playwright install --with-deps chromium
+
+      - name: Run e2e
+        working-directory: examples/demo
+        run: npm run test:e2e
+
+      - name: Upload Playwright traces on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-traces
+          path: examples/demo/test-results/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  consumer-probe:
+    name: fresh-consumer release-gate
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Run consumer probe
+        run: bash scripts/check-consumer.sh
