@@ -34,8 +34,10 @@ A small package that takes the *layout-only* Tailwind class strings an LLM emits
 
 ## Install
 
+Install the tarball from the [GitHub release](https://github.com/bbopen/tw-layout-lint/releases/tag/v0.1.1):
+
 ```sh
-npm install tw-layout-lint
+npm install https://github.com/bbopen/tw-layout-lint/releases/download/v0.1.1/tw-layout-lint-0.1.1.tgz
 ```
 
 For the React adapter, `react@>=18` is a peer dependency.
