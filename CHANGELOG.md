@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented here. The format is loosely based on [Keep a Changelog](https://keepachangelog.com), and the project adheres to [Semantic Versioning](https://semver.org).
 
+## [0.1.1] — 2026-09-22
+
+Dependency refresh for the package, demo, and CI. No public API changes.
+
+- Update Tailwind CSS, React, Vite, Playwright, and the supported test tools.
+- Update GitHub Actions checkout and Node setup to v7.
+- Keep TypeScript 6 because tsup fails when it generates declarations with TypeScript 7.
+- Keep Vitest 4 to preserve Node 20 support.
+
+[0.1.1]: https://github.com/bbopen/tw-layout-lint/releases/tag/v0.1.1
+
 ## [0.1.0] — 2026-04-28
 
 First public release.
