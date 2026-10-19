@@ -61,15 +61,15 @@
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
     "@testing-library/react": "^16.3.3",
-    "@types/node": "^26.6.2",
+    "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",
     "@vitest/coverage-v8": "^5.0.2",
     "happy-dom": "^20.14.5",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "tsup": "^8.5.0",
+    "tsup": "^9.0.0",
     "tsx": "^4.23.15",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vitest": "^5.0.2"
   },
   "engines": {
